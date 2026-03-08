@@ -23,7 +23,8 @@ const els = {
   notesInput: document.getElementById('notesInput'),
   addActivityBtn: document.getElementById('addActivityBtn'),
   exportBtn: document.getElementById('exportBtn'),
-  importInput: document.getElementById('importInput')
+  importInput: document.getElementById('importInput'),
+  seedBtn: document.getElementById('seedBtn')
 };
 
 init();
@@ -57,6 +58,7 @@ function bindEvents() {
 
   els.exportBtn.addEventListener('click', exportJson);
   els.importInput.addEventListener('change', importJson);
+  els.seedBtn?.addEventListener('click', seedDemoData);
 }
 
 function render() {
@@ -129,6 +131,34 @@ function exportJson() {
   a.download = `mission-control-backup-${Date.now()}.json`;
   a.click();
   URL.revokeObjectURL(url);
+}
+
+function seedDemoData() {
+  const ok = window.confirm('Replace current Mission Control data with demo seed data?');
+  if (!ok) return;
+
+  const now = Date.now();
+  state = sanitizeState({
+    activeTab: 'dashboard',
+    priorities: [
+      { id: uid(), label: 'Ship Growth Scout (Mon/Thu) + verify ops logging', done: true },
+      { id: uid(), label: 'Improve recipe QA editor (preserve structure, no heavy shortening)', done: false },
+      { id: uid(), label: 'Build monthly planner v3 (dedupe + method caps)', done: false },
+      { id: uid(), label: 'Add keyword normalizer + DataForSEO intent gate', done: false }
+    ],
+    activity: [
+      { id: uid(), text: 'Growth Scout digest posted to Discord', createdAt: new Date(now - 1000 * 60 * 15).toISOString() },
+      { id: uid(), text: 'Gateway/Relay connectivity stabilized (Tailscale + port publish)', createdAt: new Date(now - 1000 * 60 * 60 * 5).toISOString() },
+      { id: uid(), text: 'Mission Control scaffold created (localStorage + export/import)', createdAt: new Date(now - 1000 * 60 * 60 * 24).toISOString() }
+    ],
+    notes:
+      '- Today: verify Mon/Thu Growth Scout schedule\n' +
+      '- Capture top blockers + next actions\n' +
+      '- Keep Mission Control simple: 3-5 priorities, activity feed, and a lightweight Kanban\n'
+  });
+
+  saveState();
+  render();
 }
 
 function importJson(event) {
