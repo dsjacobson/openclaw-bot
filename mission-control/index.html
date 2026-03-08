@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mission Control</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-glow glow-a"></div>
+  <div class="bg-glow glow-b"></div>
+
+  <div class="app-shell">
+    <header class="glass header">
+      <div>
+        <h1>Mission Control</h1>
+        <p class="muted">Minimal static scaffold</p>
+      </div>
+      <nav class="tabs" aria-label="Main sections">
+        <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+        <button class="tab-btn" data-tab="projects">Projects</button>
+        <button class="tab-btn" data-tab="timeline">Timeline</button>
+        <button class="tab-btn" data-tab="notes">Notes</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="tab-panel active" data-panel="dashboard">
+        <div class="grid">
+          <section class="glass panel">
+            <div class="panel-head">
+              <h2>Top Priorities</h2>
+            </div>
+            <ul id="prioritiesList" class="list"></ul>
+          </section>
+
+          <section class="glass panel">
+            <div class="panel-head">
+              <h2>Activity Feed</h2>
+              <button class="btn" id="addActivityBtn" type="button">Add Entry</button>
+            </div>
+            <ul id="activityList" class="list"></ul>
+          </section>
+        </div>
+
+        <section class="glass panel tools">
+          <h2>Data Backup</h2>
+          <div class="actions">
+            <button class="btn accent" id="exportBtn" type="button">Export JSON</button>
+            <label class="btn" for="importInput">Import JSON</label>
+            <input id="importInput" type="file" accept="application/json" hidden />
+            <button class="btn" id="seedBtn" type="button">Seed Demo Data</button>
+          </div>
+        </section>
+      </section>
+
+      <section class="tab-panel" data-panel="projects">
+        <section class="glass panel placeholder">
+          <h2>Projects Placeholder</h2>
+          <p>Kanban board will be implemented in a future iteration.</p>
+        </section>
+      </section>
+
+      <section class="tab-panel" data-panel="timeline">
+        <section class="glass panel placeholder">
+          <h2>Timeline Placeholder</h2>
+          <p>Timeline view will be implemented in a future iteration.</p>
+        </section>
+      </section>
+
+      <section class="tab-panel" data-panel="notes">
+        <section class="glass panel">
+          <div class="panel-head">
+            <h2>Notes</h2>
+          </div>
+          <textarea id="notesInput" placeholder="Write notes..."></textarea>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
